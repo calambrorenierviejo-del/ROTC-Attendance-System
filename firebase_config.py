@@ -1,5 +1,6 @@
 
 import os
+import json
 import threading
 from pathlib import Path
 
@@ -9,16 +10,14 @@ from dotenv import load_dotenv
 
 
 # =====================================================
-# FIREBASE CONFIGURATION
+# ENVIRONMENT CONFIGURATION
 # =====================================================
 
 BASE_DIR = Path(__file__).resolve().parent
 
-load_dotenv(BASE_DIR / ".env", override=True)
+load_dotenv(BASE_DIR / ".env", override=False)
 
 _db = None
-
-# Prevent simultaneous Firebase initialization
 _firebase_lock = threading.Lock()
 
 
@@ -38,37 +37,64 @@ def get_db():
         if _db is not None:
             return _db
 
-        # Reuse an existing Firebase application
         try:
-
             firebase_app = firebase_admin.get_app()
 
         except ValueError:
 
-            credential_path = os.getenv(
-                "GOOGLE_APPLICATION_CREDENTIALS",
-                "ServiceAccountKey.json"
+            firebase_json = os.getenv(
+                "FIREBASE_SERVICE_ACCOUNT", ""
             ).strip()
 
-            key_file = Path(credential_path)
+            # =========================================
+            # VERCEL CLOUD CONNECTION
+            # =========================================
 
-            if not key_file.is_absolute():
-                key_file = BASE_DIR / key_file
+            if firebase_json:
 
-            if not key_file.is_file():
+                service_account = json.loads(firebase_json)
 
-                raise FileNotFoundError(
-                    f"Firebase service account file not found: "
-                    f"{key_file}"
-                )
+                if "private_key" in service_account:
+                    service_account["private_key"] = (
+                        service_account["private_key"]
+                        .replace("\\n", "\n")
+                    )
 
-            cred = credentials.Certificate(str(key_file))
+                cred = credentials.Certificate(service_account)
 
-            firebase_app = firebase_admin.initialize_app(
-                cred
-            )
+                print("[SUCCESS] Vercel credentials loaded.")
 
-        # Initialize Firestore client only once
+            # =========================================
+            # LOCAL PYCHARM CONNECTION
+            # =========================================
+
+            else:
+
+                credential_path = os.getenv(
+                    "GOOGLE_APPLICATION_CREDENTIALS",
+                    "ServiceAccountKey.json"
+                ).strip()
+
+                key_file = Path(credential_path)
+
+                if not key_file.is_absolute():
+                    key_file = BASE_DIR / key_file
+
+                if not key_file.is_file():
+                    raise FileNotFoundError(
+                        f"Firebase service account not found: {key_file}"
+                    )
+
+                cred = credentials.Certificate(str(key_file))
+
+                print("[SUCCESS] Local credentials loaded.")
+
+            firebase_app = firebase_admin.initialize_app(cred)
+
+        # =============================================
+        # INITIALIZE FIRESTORE CLIENT
+        # =============================================
+
         _db = firestore.client(app=firebase_app)
 
         print("[SUCCESS] Firebase Firestore initialized.")
