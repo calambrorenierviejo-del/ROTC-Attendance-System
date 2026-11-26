@@ -1,1 +1,721 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf }}">
+    <meta name="theme-color" content="#182019">
+
+    <title>ROTC Command | Tactical Operations Center</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script defer
+            src="{{ url_for('static', filename='js/app.js') }}">
+    </script>
+</head>
+
+<body>
+
+<!-- =========================================
+     MILITARY SVG ILLUSTRATION LIBRARY
+========================================== -->
+
+<svg class="svg-library" xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+
+        <pattern id="camouflage" width="100" height="80"
+                 patternUnits="userSpaceOnUse">
+
+            <rect width="100" height="80" fill="#68734b"/>
+
+            <path d="M0 0H36L49 17L28 37L0 25Z
+                     M65 45L100 30V80H50Z"
+                  fill="#303d2a"/>
+
+            <path d="M40 0H75L90 20L62 35L45 20Z
+                     M0 55L25 40L45 65L20 80H0Z"
+                  fill="#a49b71"/>
+
+            <path d="M0 35L18 29L35 45L18 58L0 50Z
+                     M78 0H100V23L88 30L70 17Z"
+                  fill="#222c21"/>
+
+        </pattern>
+
+        <linearGradient id="goldGradient" x1="0" y1="0"
+                        x2="1" y2="1">
+            <stop offset="0%" stop-color="#f3df9c"/>
+            <stop offset="50%" stop-color="#c7a65c"/>
+            <stop offset="100%" stop-color="#8a6c30"/>
+        </linearGradient>
+
+    </defs>
+
+    <!-- Military Shield -->
+
+    <symbol id="i-shield" viewBox="0 0 100 110">
+
+        <path d="M50 4L94 20V59Q91 87 50 106
+                 Q9 87 6 59V20Z"
+              fill="#263526"
+              stroke="url(#goldGradient)"
+              stroke-width="5"/>
+
+        <path d="M50 15L83 27V58Q79 79 50 94
+                 Q21 79 17 58V27Z"
+              fill="none" stroke="#c7a65c"
+              stroke-width="1.5"/>
+
+        <path d="M50 25L57 42L76 43L61 56
+                 L66 75L50 64L34 75L39 56
+                 L24 43L43 42Z"
+              fill="url(#goldGradient)"/>
+
+        <path d="M25 82L50 94L75 82"
+              fill="none" stroke="#c7a65c"
+              stroke-width="3"/>
+
+    </symbol>
+
+    <!-- Cadet Wearing Camouflage Uniform -->
+
+    <symbol id="i-cadet" viewBox="0 0 240 270">
+
+        <ellipse cx="120" cy="260" rx="100" ry="8"
+                 fill="#000" opacity=".18"/>
+
+        <path d="M27 270L35 177Q40 153 88 143
+                 H152Q200 153 205 177L215 270Z"
+              fill="url(#camouflage)"
+              stroke="#283322" stroke-width="3"/>
+
+        <path d="M100 116V151L120 172L140 151V116"
+              fill="#b88e6c"/>
+
+        <ellipse cx="80" cy="100" rx="10" ry="16"
+                 fill="#c69e7b"/>
+
+        <ellipse cx="160" cy="100" rx="10" ry="16"
+                 fill="#c69e7b"/>
+
+        <path d="M79 64Q120 34 161 64L157 112
+                 Q148 143 120 146Q92 143 83 112Z"
+              fill="#d8b38c"/>
+
+        <path d="M77 81L72 58Q76 23 120 23
+                 Q164 23 168 58L163 81Z"
+              fill="url(#camouflage)"
+              stroke="#273222" stroke-width="3"/>
+
+        <path d="M71 78Q120 65 169 78
+                 L156 88H84Z"
+              fill="#293624"/>
+
+        <path d="M94 100H105M135 100H146"
+              stroke="#493d30" stroke-width="3"
+              stroke-linecap="round"/>
+
+        <path d="M120 103L116 117H124
+                 M109 128Q120 134 131 128"
+              fill="none" stroke="#956b4c"
+              stroke-width="2"/>
+
+        <path d="M90 144L120 172L100 192
+                 L75 152Z
+                 M150 144L120 172L140 192
+                 L165 152Z"
+              fill="#3d4a32"
+              stroke="#293624" stroke-width="2"/>
+
+        <path d="M120 172V270"
+              stroke="#263421" stroke-width="4"/>
+
+        <path d="M49 207H103V245H49Z
+                 M137 207H191V245H137Z"
+              fill="url(#camouflage)"
+              stroke="#293624" stroke-width="2"/>
+
+        <path d="M49 207L76 218L103 207
+                 M137 207L164 218L191 207"
+              fill="none" stroke="#293624"
+              stroke-width="2"/>
+
+        <rect x="48" y="193" width="56" height="12"
+              rx="1" fill="#263421"/>
+
+        <rect x="136" y="193" width="56" height="12"
+              rx="1" fill="#263421"/>
+
+        <text x="76" y="202" fill="#e1ddbd"
+              font-size="9" text-anchor="middle"
+              font-weight="bold">ROTC</text>
+
+        <text x="164" y="202" fill="#e1ddbd"
+              font-size="9" text-anchor="middle"
+              font-weight="bold">CADET</text>
+
+        <path d="M42 170L70 155L77 165L48 182Z
+                 M198 170L170 155L163 165L192 182Z"
+              fill="#c7a65c"/>
+
+        <circle cx="120" cy="52" r="11"
+                fill="#293624" stroke="#c7a65c"/>
+
+        <path d="M120 44L123 49L129 50L125 55
+                 L126 61L120 58L114 61L115 55
+                 L111 50L117 49Z"
+              fill="#c7a65c"/>
+
+    </symbol>
+
+    <!-- Military Uniform -->
+
+    <symbol id="i-uniform" viewBox="0 0 100 110">
+
+        <path d="M30 10L5 27L12 65L25 59
+                 V104H75V59L88 65L95 27L70 10
+                 L50 29Z"
+              fill="url(#camouflage)"
+              stroke="#263421" stroke-width="3"/>
+
+        <path d="M30 10L50 29L37 45L23 16
+                 M70 10L50 29L63 45L77 16"
+              fill="#34432b" stroke="#263421"
+              stroke-width="2"/>
+
+        <path d="M50 29V104"
+              stroke="#263421" stroke-width="3"/>
+
+        <rect x="29" y="52" width="17" height="22"
+              fill="url(#camouflage)"
+              stroke="#263421"/>
+
+        <rect x="54" y="52" width="17" height="22"
+              fill="url(#camouflage)"
+              stroke="#263421"/>
+
+        <rect x="28" y="43" width="18" height="6"
+              fill="#263421"/>
+
+        <rect x="54" y="43" width="18" height="6"
+              fill="#263421"/>
+
+    </symbol>
+
+    <!-- Patrol Cap -->
+
+    <symbol id="i-cap" viewBox="0 0 100 80">
+
+        <path d="M12 50L18 22Q50 2 82 22L88 50Z"
+              fill="url(#camouflage)"
+              stroke="#263421" stroke-width="3"/>
+
+        <path d="M10 48Q50 40 90 48L79 64
+                 Q50 73 21 64Z"
+              fill="#34432b" stroke="#263421"
+              stroke-width="3"/>
+
+        <path d="M50 20L54 29L64 30L57 37
+                 L59 47L50 42L41 47L43 37
+                 L36 30L46 29Z"
+              fill="#c7a65c"/>
+
+    </symbol>
+
+    <!-- Military Dog Tag -->
+
+    <symbol id="i-dogtag" viewBox="0 0 100 110">
+
+        <path d="M30 35Q4 4 45 5Q86 5 65 35"
+              fill="none" stroke="#a5a99c"
+              stroke-width="4" stroke-dasharray="3 4"/>
+
+        <rect x="30" y="30" width="52" height="72"
+              rx="12" transform="rotate(12 56 66)"
+              fill="#69766b" stroke="#b7c1b2"
+              stroke-width="3"/>
+
+        <rect x="13" y="25" width="52" height="72"
+              rx="12" fill="#a6ada0"
+              stroke="#d9dfd1" stroke-width="3"/>
+
+        <circle cx="39" cy="36" r="5" fill="#303b30"/>
+
+        <path d="M24 52H54M24 62H54M24 72H46"
+              stroke="#586458" stroke-width="3"/>
+
+    </symbol>
+
+    <!-- Interface Icons -->
+
+    <symbol id="i-dashboard" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+        <rect x="14" y="14" width="7" height="7" rx="1"/>
+    </symbol>
+
+    <symbol id="i-users" viewBox="0 0 24 24">
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M2 21V18Q2 13 9 13Q16 13 16 18V21
+                 M17 4Q23 7 17 11M18 14Q22 15 22 21"/>
+    </symbol>
+
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2"/>
+        <path d="M7 2V8M17 2V8M3 11H21
+                 M7 15H10M14 15H17"/>
+    </symbol>
+
+    <symbol id="i-check" viewBox="0 0 24 24">
+        <path d="M5 12L10 17L20 6"/>
+    </symbol>
+
+    <symbol id="i-megaphone" viewBox="0 0 24 24">
+        <path d="M3 9H9L21 3V21L9 15H3Z
+                 M6 15L9 22H13L10 15"/>
+    </symbol>
+
+    <symbol id="i-personnel" viewBox="0 0 24 24">
+        <circle cx="12" cy="7" r="4"/>
+        <path d="M4 22V18Q4 13 12 13Q20 13 20 18V22
+                 M8 15L12 19L16 15"/>
+    </symbol>
+
+    <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="10" cy="10" r="6"/>
+        <path d="M15 15L21 21"/>
+    </symbol>
+
+    <symbol id="i-plus" viewBox="0 0 24 24">
+        <path d="M12 4V20M4 12H20"/>
+    </symbol>
+
+    <symbol id="i-eye" viewBox="0 0 24 24">
+        <path d="M2 12Q12 -1 22 12Q12 25 2 12Z"/>
+        <circle cx="12" cy="12" r="3"/>
+    </symbol>
+
+    <symbol id="i-edit" viewBox="0 0 24 24">
+        <path d="M4 16L16 4L20 8L8 20H4Z
+                 M13 7L17 11"/>
+    </symbol>
+
+    <symbol id="i-trash" viewBox="0 0 24 24">
+        <path d="M3 6H21M9 6V3H15V6
+                 M6 6L7 21H17L18 6
+                 M10 10V17M14 10V17"/>
+    </symbol>
+
+    <symbol id="i-close" viewBox="0 0 24 24">
+        <path d="M5 5L19 19M19 5L5 19"/>
+    </symbol>
+
+    <symbol id="i-refresh" viewBox="0 0 24 24">
+        <path d="M20 9A8 8 0 1 0 20 16
+                 M20 3V9H14"/>
+    </symbol>
+
+    <symbol id="i-download" viewBox="0 0 24 24">
+        <path d="M12 3V16M6 10L12 16L18 10
+                 M3 17V21H21V17"/>
+    </symbol>
+
+    <symbol id="i-print" viewBox="0 0 24 24">
+        <path d="M6 8V3H18V8M6 17H3V8H21V17H18
+                 M6 13H18V22H6Z"/>
+    </symbol>
+
+    <symbol id="i-table" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="1"/>
+        <path d="M3 10H21M3 15H21M10 4V20"/>
+    </symbol>
+
+    <symbol id="i-menu" viewBox="0 0 24 24">
+        <path d="M3 6H21M3 12H21M3 18H21"/>
+    </symbol>
+
+    <symbol id="i-moon" viewBox="0 0 24 24">
+        <path d="M20 15A9 9 0 0 1 9 3
+                 A9 9 0 1 0 20 15Z"/>
+    </symbol>
+
+    <symbol id="i-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 1V5M12 19V23M1 12H5M19 12H23
+                 M4 4L7 7M17 17L20 20
+                 M4 20L7 17M17 7L20 4"/>
+    </symbol>
+
+    <symbol id="i-warning" viewBox="0 0 24 24">
+        <path d="M12 3L22 21H2Z
+                 M12 9V14M12 17V18"/>
+    </symbol>
+
+</svg>
+
+
+<!-- =========================================
+     ANIMATED STARTUP SCREEN
+========================================== -->
+
+<div id="startup" class="startup">
+
+    <div class="startup-emblem">
+
+        <div class="startup-ring"></div>
+
+        <svg class="emblem">
+            <use href="#i-shield"/>
+        </svg>
+
+    </div>
+
+    <span class="military-stars">★ ★ ★</span>
+
+    <h1>ROTC COMMAND</h1>
+
+    <p>TACTICAL OPERATIONS CENTER</p>
+
+    <div class="startup-progress">
+        <span></span>
+    </div>
+
+    <small>INITIALIZING COMMAND INTERFACE</small>
+
+</div>
+
+
+<!-- =========================================
+     SIDEBAR
+========================================== -->
+
+<div id="mobileOverlay" class="mobile-overlay"></div>
+
+<aside id="sidebar" class="sidebar">
+
+    <div class="brand">
+
+        <svg class="brand-emblem">
+            <use href="#i-shield"/>
+        </svg>
+
+        <div>
+            <h2>ROTC COMMAND</h2>
+            <small>TACTICAL OPERATIONS</small>
+        </div>
+
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="command-label">
+        <span class="signal-dot"></span>
+        COMMAND INTERFACE
+    </div>
+
+    <p class="nav-caption">MAIN OPERATIONS</p>
+
+    <nav id="navigation"></nav>
+
+    <div class="sidebar-decoration">
+
+        <svg class="sidebar-uniform">
+            <use href="#i-uniform"/>
+        </svg>
+
+        <div class="military-stars">★ ★ ★</div>
+
+        <h3>DISCIPLINE</h3>
+        <h3>LEADERSHIP</h3>
+        <h3>SERVICE</h3>
+
+        <small>RESERVE OFFICERS' TRAINING CORPS</small>
+
+    </div>
+
+    <footer class="sidebar-footer">
+
+        <span>TACTICAL EDITION</span>
+        <span>V2.0</span>
+
+    </footer>
+
+</aside>
+
+
+<!-- =========================================
+     MAIN APPLICATION
+========================================== -->
+
+<main id="mainContent" class="main-content">
+
+    <header class="topbar">
+
+        <div class="header-left">
+
+            <button id="menuButton"
+                    class="icon-button mobile-menu"
+                    aria-label="Toggle navigation">
+
+                <svg class="icon">
+                    <use href="#i-menu"/>
+                </svg>
+
+            </button>
+
+            <div>
+
+                <span class="eyebrow">
+                    HEADQUARTERS / OPERATIONS
+                </span>
+
+                <h1 id="pageTitle">Command Center</h1>
+
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="connection-status"
+                 id="connectionStatus"
+                 role="status">
+
+                <span class="signal-dot"></span>
+
+                <span id="connectionText">
+                    CONNECTING
+                </span>
+
+            </div>
+
+            <div class="command-clock">
+
+                <strong id="clock">--:--:--</strong>
+
+                <small id="clockDate"></small>
+
+            </div>
+
+            <button id="themeButton"
+                    class="icon-button"
+                    aria-label="Toggle dark or light mode">
+
+                <svg class="icon">
+                    <use id="themeIcon" href="#i-sun"/>
+                </svg>
+
+            </button>
+
+            <button id="refreshButton"
+                    class="icon-button"
+                    title="Refresh records"
+                    aria-label="Refresh records">
+
+                <svg class="icon">
+                    <use href="#i-refresh"/>
+                </svg>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <div class="page-wrapper">
+
+        <div id="pageContent"
+             aria-live="polite"></div>
+
+        <footer class="main-footer">
+
+            <span>
+                ★ ROTC COMMAND MANAGEMENT SYSTEM
+            </span>
+
+            <span>
+                DISCIPLINE · LEADERSHIP · SERVICE
+            </span>
+
+        </footer>
+
+    </div>
+
+</main>
+
+
+<!-- =========================================
+     RECORD FORM / DETAILS DIALOG
+========================================== -->
+
+<dialog id="recordDialog" class="military-dialog">
+
+    <div class="dialog-header">
+
+        <div class="dialog-heading">
+
+            <svg class="dialog-emblem">
+                <use href="#i-shield"/>
+            </svg>
+
+            <div>
+
+                <span class="eyebrow">
+                    COMMAND RECORD MANAGEMENT
+                </span>
+
+                <h2 id="dialogTitle">New Record</h2>
+
+            </div>
+
+        </div>
+
+        <button id="closeDialog"
+                class="icon-button"
+                aria-label="Close dialog">
+
+            <svg class="icon">
+                <use href="#i-close"/>
+            </svg>
+
+        </button>
+
+    </div>
+
+    <form id="recordForm">
+
+        <div id="formError"
+             class="form-error"
+             role="alert"
+             hidden></div>
+
+        <div id="formFields" class="form-grid"></div>
+
+        <div class="dialog-footer">
+
+            <button type="button"
+                    id="cancelForm"
+                    class="btn btn-secondary">
+
+                CANCEL
+
+            </button>
+
+            <button type="submit"
+                    id="saveButton"
+                    class="btn btn-primary">
+
+                SAVE RECORD
+
+            </button>
+
+        </div>
+
+    </form>
+
+</dialog>
+
+
+<!-- =========================================
+     DELETE CONFIRMATION
+========================================== -->
+
+<dialog id="confirmDialog" class="military-dialog confirm-dialog">
+
+    <div class="confirm-content">
+
+        <div class="warning-emblem">
+
+            <svg class="icon">
+                <use href="#i-warning"/>
+            </svg>
+
+        </div>
+
+        <span class="eyebrow">COMMAND AUTHORIZATION</span>
+
+        <h2>CONFIRM DELETION</h2>
+
+        <p id="confirmMessage"></p>
+
+        <p class="danger-text">
+            This action cannot be undone.
+        </p>
+
+        <div class="confirm-actions">
+
+            <button id="cancelDelete"
+                    class="btn btn-secondary">
+                CANCEL
+            </button>
+
+            <button id="confirmDelete"
+                    class="btn btn-danger">
+                CONFIRM DELETE
+            </button>
+
+        </div>
+
+    </div>
+
+</dialog>
+
+
+<!-- =========================================
+     RADAR LOADING OVERLAY
+========================================== -->
+
+<div id="loadingOverlay"
+     class="loading-overlay"
+     role="status"
+     hidden>
+
+    <div class="loading-box">
+
+        <div class="radar">
+
+            <div class="radar-circle circle-one"></div>
+            <div class="radar-circle circle-two"></div>
+            <div class="radar-circle circle-three"></div>
+
+            <div class="radar-cross"></div>
+            <div class="radar-sweep"></div>
+
+            <span class="radar-point point-one"></span>
+            <span class="radar-point point-two"></span>
+            <span class="radar-point point-three"></span>
+
+        </div>
+
+        <h3 id="loadingText">PROCESSING COMMAND</h3>
+
+        <p>Please wait...</p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     ANIMATED NOTIFICATIONS
+========================================== -->
+
+<div id="toastContainer"
+     class="toast-container"
+     aria-live="polite"></div>
+
+</body>
+
+</html>
